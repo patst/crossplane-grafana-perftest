@@ -1,0 +1,46 @@
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  name: grafana-tf
+spec:
+  args:
+    - --poll=12h
+    - --sync=12h
+    - --debug
+  resources:
+    limits:
+      cpu: 4
+      memory: 2Gi
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+    runAsNonRoot: true
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+---
+apiVersion: grafana.crossplane.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: grafana-tf-admin-creds
+      namespace: crossplane
+      key: instanceCredentials
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-tf-admin-creds
+  namespace: crossplane # must be in the crossplane namespace
+stringData:
+  instanceCredentials: |
+    {
+      "auth": "admin:admin",
+      "url": "http://grafana.crossplane-system.svc.cluster.local:3000/"
+    }

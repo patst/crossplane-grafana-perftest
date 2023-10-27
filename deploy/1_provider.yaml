@@ -1,0 +1,8 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: grafana-tf
+spec:
+  controllerConfigRef:
+    name: grafana-tf
+  package:  grafana/provider-grafana:v0.7.0
