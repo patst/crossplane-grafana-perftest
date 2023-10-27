@@ -39,7 +39,7 @@ Version *0.7.0* (based on Upjet version 0.8.0):
 |    100    |     1:53 min      |     1:21 min     |
 |   1000    |     19:32 min     |      25 min      |
 
-Next Version  based on Upjet version 0.10.0:
+Next Version  based on Upjet version 0.10.0: (see Pull Request at https://github.com/grafana/crossplane-provider-grafana/pull/49 )
 
 | # Folders | Time for creation | Time for destroy |
 |:---------:|:-----------------:|:----------------:|
